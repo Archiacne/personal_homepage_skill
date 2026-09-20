@@ -49,6 +49,30 @@ After installation, the skill entrypoint should be located at:
 ~/.codex/skills/personal-homepage-builder/SKILL.md
 ```
 
+## Update
+
+Pull the latest version from GitHub with the command for your shell, then restart Codex if the changes are not detected automatically.
+
+### PowerShell
+
+```powershell
+git -C "$HOME\.codex\skills\personal-homepage-builder" pull --ff-only
+```
+
+### CMD
+
+```bat
+git -C "%USERPROFILE%\.codex\skills\personal-homepage-builder" pull --ff-only
+```
+
+### Bash
+
+```bash
+git -C "$HOME/.codex/skills/personal-homepage-builder" pull --ff-only
+```
+
+If Git reports local changes or cannot fast-forward, run `git status` in the skill directory and review those changes before updating. Do not force an update unless you intend to discard them.
+
 ## Usage
 
 Prerequisite: the current project folder contains a personal profile document.

@@ -49,6 +49,30 @@ git clone https://github.com/Archiacne/personal_homepage_skill.git "$HOME/.codex
 ~/.codex/skills/personal-homepage-builder/SKILL.md
 ```
 
+## 更新
+
+根据使用的命令行执行对应命令，从 GitHub 拉取最新版本。更新完成后，如果 Codex 未自动识别改动，请重新启动 Codex。
+
+### PowerShell
+
+```powershell
+git -C "$HOME\.codex\skills\personal-homepage-builder" pull --ff-only
+```
+
+### CMD
+
+```bat
+git -C "%USERPROFILE%\.codex\skills\personal-homepage-builder" pull --ff-only
+```
+
+### Bash
+
+```bash
+git -C "$HOME/.codex/skills/personal-homepage-builder" pull --ff-only
+```
+
+如果 Git 提示存在本地修改或无法快进更新，请先在 Skill 目录中执行 `git status` 并检查这些修改。除非确定要放弃本地修改，否则不要强制更新。
+
 ## 使用
 
 前提：当前项目文件夹已有 "个人资料" 文档
