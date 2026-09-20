@@ -1,92 +1,92 @@
 ---
 name: personal-homepage-builder
-description: Create or revise a personal homepage, About Me site, portfolio, Markdown blog, or GitHub Profile README through conversation. Use for personal-site planning and implementation, content-driven redesigns, and connecting a homepage with About, Blog, projects, and GitHub. Do not use for unrelated product websites, dashboards, e-commerce, or isolated generic frontend components.
+description: 通过对话创建或修改个人主页、About Me 网站、作品集、Markdown Blog 或 GitHub Profile README。适用于个人网站规划与实现、基于内容的重新设计，以及连接主页与 About、Blog、项目和 GitHub。不适用于无关的产品网站、仪表盘、电商网站或孤立的通用前端组件。
 metadata:
-  short-description: Build personal websites and GitHub profiles
+  short-description: 构建个人网站与 GitHub 主页
 ---
 
-# Personal Homepage Builder
+# Personal Homepage Builder（个人主页构建器）
 
-Build a working, maintainable personal website from the user's content and constraints. Treat the homepage as the main entry point to About, Blog, and GitHub. Generate a GitHub Profile README when requested or when it is part of the agreed site package.
+根据用户提供的内容与约束，构建可运行、可维护的个人网站。将主页作为进入 About、Blog 和 GitHub 的主要入口。当用户提出要求，或双方约定的交付内容中包含此项时，生成 GitHub Profile README。
 
-## Choose the implementation path
+## 选择实现路径
 
-Inspect the workspace before changing files.
+修改文件前先检查工作区。
 
-1. For an existing project, preserve its framework, package manager, design language, and unrelated files. Read [references/default-architecture.md](references/default-architecture.md) only for quality and content-structure guidance; do not migrate merely to match the default.
-2. For a new project with a user-selected stack, use that stack.
-3. For a new project without a selected stack, read [references/default-architecture.md](references/default-architecture.md) and use the Astro static-site default.
-4. If the request is only for a GitHub Profile README, do not create a website project.
+1. 对于已有项目，保留其框架、包管理器、设计语言和无关文件。仅将 [references/default-architecture.md](references/default-architecture.md) 用作质量与内容结构指导；不要为了匹配默认方案而迁移项目。
+2. 对于用户已指定技术栈的新项目，使用用户选择的技术栈。
+3. 对于用户未指定技术栈的新项目，阅读 [references/default-architecture.md](references/default-architecture.md)，并采用默认的 Astro 静态网站方案。
+4. 如果用户只需要 GitHub Profile README，不要创建网站项目。
 
-For the default path, create the project with `scripts/scaffold_site.py <target> --name <project-name>` when copying the bundled starter is appropriate. The script refuses to write into a non-empty directory; never bypass that guard for an existing project.
+当适合复制内置 starter 时，使用 `scripts/scaffold_site.py <target> --name <project-name>` 创建默认项目。该脚本拒绝写入非空目录；对于已有项目，绝不能绕过此保护。
 
-If the user's requested technology conflicts with a required outcome, explain the concrete tradeoff and follow their final choice. Do not ask them to choose technical details that have a safe default.
+如果用户要求的技术与必要交付结果存在冲突，说明具体取舍，并遵循用户的最终选择。对于已有安全默认值的技术细节，不要要求用户额外选择。
 
-## Workflow
+## 工作流程
 
-### 1. Discover the site
+### 1. 了解网站需求
 
-Read [references/discovery-and-content.md](references/discovery-and-content.md) when creating a site, importing user materials, or restructuring content.
+创建网站、导入用户资料或重组内容时，阅读 [references/discovery-and-content.md](references/discovery-and-content.md)。
 
-Extract information already present in the conversation and files before asking questions. Establish:
+提问前，先提取对话和文件中已经存在的信息。确认：
 
-- the site's purpose and audience;
-- the display name and one-line identity;
-- the intended Home, About, Blog, projects, GitHub, and contact content;
-- the requested language, defaulting to English when none is specified;
-- visual direction and supplied references;
-- publishing requirements and existing constraints.
+- 网站用途与目标受众；
+- 展示名称与一句话身份介绍；
+- 计划包含的 Home、About、Blog、项目、GitHub 和联系方式；
+- 用户要求的语言；如未指定，默认使用英文；
+- 视觉方向和用户提供的参考资料；
+- 发布要求与已有约束。
 
-Ask only for missing information that materially changes the result. If content is incomplete, proceed with honest empty states, omit irrelevant sections, or use visibly marked placeholders. Never invent biography, employment, education, projects, metrics, repositories, awards, or contact details.
+只询问会实质影响结果的缺失信息。如果内容不完整，使用真实明确的空状态、删除无关区块，或使用醒目标记的占位内容。绝不能虚构个人简介、工作经历、教育经历、项目、数据指标、代码仓库、奖项或联系方式。
 
-### 2. Form a brief
+### 2. 形成简要方案
 
-Before implementation, state a compact brief covering:
+实现前，给出一份简短方案，说明：
 
-- primary audience and desired impression;
-- page and navigation structure;
-- content supplied versus content still missing;
-- visual direction;
-- chosen implementation path and deployment assumptions.
+- 主要受众与希望传达的印象；
+- 页面和导航结构；
+- 已提供的内容与仍然缺失的内容；
+- 视觉方向；
+- 选定的实现路径与部署假设。
 
-For a simple, clear request, state assumptions and proceed without waiting for line-by-line approval.
+对于简单明确的需求，说明必要假设后直接继续，无需等待用户逐项批准。
 
-### 3. Build the site
+### 3. 构建网站
 
-Create a real runnable site, not a visual mockup. Keep content data separate from page presentation. The homepage must visibly link to About, Blog, and the user's real GitHub URL when supplied.
+创建真正可运行的网站，而不是视觉模型。将内容数据与页面展示分离。主页必须清晰链接到 About、Blog，以及用户提供的真实 GitHub URL。
 
-Use semantic HTML and responsive, content-first layouts. Read [references/design-quality.md](references/design-quality.md) before creating or substantially changing the visual system.
+使用语义化 HTML 和响应式、内容优先的布局。创建或大幅修改视觉系统前，阅读 [references/design-quality.md](references/design-quality.md)。
 
-Use English for the site, page metadata, navigation, sample copy, and GitHub Profile README unless the user explicitly requests another language. Generate one language only. Multilingual routes and language-switching controls are not currently supported; if requested, explain this limitation and ask the user to choose one language for the generated site.
+除非用户明确要求其他语言，否则网站正文、页面元数据、导航、示例文案和 GitHub Profile README 均使用英文。每次只生成一种语言。当前暂不支持多语言路由和语言切换控件；如果用户提出此需求，说明限制，并请用户选择本次生成网站使用的一种语言。
 
-When the user does not provide a visual direction, inspect [assets/reference.html](assets/reference.html) and use its centered, minimal profile composition as the default. Adapt the structure to the user's real content and selected framework; do not copy placeholder identity, links, or tracking code from an external reference.
+如果用户没有提供视觉方向，检查 [assets/reference.html](assets/reference.html)，并默认采用其中居中、极简的个人资料布局。根据用户真实内容和所选框架调整结构；不要复制外部参考中的占位身份、链接或追踪代码。
 
-### 4. Build the GitHub profile deliverable
+### 4. 构建 GitHub 主页交付物
 
-Read [references/github-profile.md](references/github-profile.md) when creating or editing a GitHub Profile README. Keep it as a separate deliverable unless the user names an existing profile repository.
+创建或修改 GitHub Profile README 时，阅读 [references/github-profile.md](references/github-profile.md)。除非用户明确指定已有的 Profile 仓库，否则将其作为独立交付物保存。
 
-Do not create a remote repository, replace an existing README, commit, push, or publish without the user's explicit request and the necessary authorization.
+未经用户明确要求并获得必要授权，不得创建远程仓库、替换已有 README、commit、push 或发布。
 
-### 5. Preview and revise
+### 5. 预览与修改
 
-Run the site locally or create an equivalent preview. Inspect at least one mobile and one desktop viewport. Apply feedback as local changes: preserve accepted structure and content unless the requested revision requires broader work.
+在本地运行网站或创建等效预览。至少检查一个移动端和一个桌面端视口。根据反馈进行本地修改；除非修改要求确实需要扩大范围，否则保留用户已经接受的结构和内容。
 
-### 6. Validate and deliver
+### 6. 验证与交付
 
-Read [references/validation-and-delivery.md](references/validation-and-delivery.md) before final delivery or publishing.
+最终交付或发布前，阅读 [references/validation-and-delivery.md](references/validation-and-delivery.md)。
 
-At minimum:
+至少完成：
 
-- install dependencies using the project's lockfile policy;
-- run type/content checks and a production build;
-- inspect Home, About, Blog, one article, and GitHub links that exist;
-- check keyboard access, visible focus, headings, alt text, contrast, mobile overflow, and browser console errors;
-- distinguish local completion from public deployment.
+- 按照项目的 lockfile 策略安装依赖；
+- 执行类型检查、内容检查和生产构建；
+- 检查已有的 Home、About、Blog、一篇文章和 GitHub 链接；
+- 检查键盘操作、可见焦点、标题层级、替代文本、对比度、移动端溢出和浏览器控制台错误；
+- 明确区分本地完成与公开部署。
 
-Report what was built, how to run it, where content is edited, what remains to configure, and any verification limitations.
+说明已构建的内容、运行方式、内容编辑位置、仍需配置的事项，以及验证过程中的限制。
 
-## Publishing boundary
+## 发布边界
 
-Local generation is the default. Publish only when the user asks for it. Read [references/deployment.md](references/deployment.md) before preparing or executing a deployment. Before a remote mutation, confirm the exact repository or hosting target, existing content handling, and any required domain or environment configuration. Never store secrets in source files, Markdown, build output, or Git history.
+默认只在本地生成。仅在用户提出要求时发布。准备或执行部署前，阅读 [references/deployment.md](references/deployment.md)。进行远程修改前，确认准确的代码仓库或托管目标、已有内容的处理方式，以及必要的域名或环境配置。绝不能将密钥保存到源代码、Markdown、构建产物或 Git 历史中。
 
-For a new static site where the user requests publishing but gives no provider preference, recommend GitHub Pages. Support another provider when requested. Verify the public URL before reporting deployment complete.
+对于用户要求发布、但未指定服务商的新静态网站，推荐 GitHub Pages。用户指定其他服务商时应予以支持。在确认部署完成前，必须验证公开 URL 可以正常访问。
