@@ -34,6 +34,14 @@ The skill preserves an existing project's architecture. For a new project withou
 
 Local generation is the default. Creating repositories, pushing to GitHub, or publishing a site occurs only when explicitly requested.
 
+Create a default project in a new or empty directory:
+
+```text
+python scripts/scaffold_site.py ./my-homepage --name my-homepage
+```
+
+The script refuses to overwrite a non-empty directory. After replacing the starter placeholders, run `npm run validate` inside the generated project.
+
 ## Development status
 
 - Skill routing, content rules, default architecture, GitHub Profile guidance, and delivery checks are implemented.

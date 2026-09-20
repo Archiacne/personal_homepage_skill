@@ -111,7 +111,9 @@ Provide semantic equivalents of:
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "audit": "node scripts/validate-build.mjs",
+    "validate": "npm run build && npm run audit"
   }
 }
 ```
@@ -125,4 +127,3 @@ Local delivery is the default. If the user requests publishing without selecting
 For GitHub Pages, configure the real `site` and required `base`, then test subpath links. Prefer the official Astro deployment action appropriate to the generated project version.
 
 For static Vercel or Netlify deployment, use the normal build command and `dist` output. Add a platform adapter only for on-demand rendering.
-

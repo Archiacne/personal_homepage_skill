@@ -18,6 +18,8 @@ npm install
 npm run dev
 npm run check
 npm run build
+npm run audit
+npm run validate
 npm run preview
 ```
 
@@ -26,3 +28,5 @@ Example GitHub Pages project build:
 ```text
 SITE_URL=https://username.github.io BASE_PATH=/repository-name npm run build
 ```
+
+`npm run validate` performs the type/content checks, production build, and a static audit of page metadata, landmarks, headings, image alt text, and internal links.

@@ -13,6 +13,7 @@ Use the project's own commands when they exist. For the default Astro project, r
 ```text
 npm run check
 npm run build
+npm run audit
 npm run preview
 ```
 
@@ -84,4 +85,3 @@ Lead with the outcome and include:
 4. checks performed and their results;
 5. remaining placeholders, unconfirmed translations, or configuration;
 6. the verified public URL only if publishing completed.
-

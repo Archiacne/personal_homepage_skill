@@ -11,7 +11,9 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "audit": "node scripts/validate-build.mjs",
+    "validate": "npm run build && npm run audit"
   },
   "dependencies": {
     "astro": "7.3.3"
@@ -21,4 +23,3 @@
     "typescript": "6.0.3"
   }
 }
-

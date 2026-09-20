@@ -18,6 +18,8 @@ Inspect the workspace before changing files.
 3. For a new project without a selected stack, read [references/default-architecture.md](references/default-architecture.md) and use the Astro static-site default.
 4. If the request is only for a GitHub Profile README, do not create a website project.
 
+For the default path, create the project with `scripts/scaffold_site.py <target> --name <project-name>` when copying the bundled starter is appropriate. The script refuses to write into a non-empty directory; never bypass that guard for an existing project.
+
 If the user's requested technology conflicts with a required outcome, explain the concrete tradeoff and follow their final choice. Do not ask them to choose technical details that have a safe default.
 
 ## Workflow
@@ -92,4 +94,3 @@ Report what was built, how to run it, where content is edited, what remains to c
 Local generation is the default. Publish only when the user asks for it. Before a remote mutation, confirm the exact repository or hosting target, existing content handling, and any required domain or environment configuration. Never store secrets in source files, Markdown, build output, or Git history.
 
 For a new static site where the user requests publishing but gives no provider preference, recommend GitHub Pages. Support another provider when requested. Verify the public URL before reporting deployment complete.
-
