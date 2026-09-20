@@ -2,47 +2,65 @@
 
 [中文说明](./README-zh.md)
 
-A Codex skill for creating and revising personal homepages, About Me pages, Markdown blogs, portfolios, and GitHub Profile READMEs through conversation.
+A Codex skill that lets an agent create personal homepages, About Me pages, blogs, portfolios, and GitHub Profile READMEs through conversation.
 
-## Capabilities
+## Features
 
-- Builds a working personal website with Home, About, Blog, and GitHub navigation.
-- Uses an existing project's stack or the user's requested stack.
-- Defaults to a static Astro + TypeScript architecture when no stack is specified.
-- Supports Chinese and English content without inventing missing translations.
-- Creates a separate GitHub Profile README deliverable.
-- Validates builds, links, responsive layouts, accessibility basics, and browser behavior.
-- Keeps publishing and remote GitHub changes behind explicit user authorization.
+- Create the relevant pages and content through conversation.
+- Revise an existing site or generated result.
+- Preview the website locally.
+- Automatically deploy the website when requested and authorized.
 
-## Install
+## Requirements
 
-Copy or clone this repository into your Codex skills directory so that `SKILL.md` is at the skill root:
+- Codex desktop app or Codex CLI.
+- Git, for installation and version control.
+- Node.js 22.12.0 or later and npm 9.6.5 or later, for local preview, build, and deployment.
+- Python 3, only when validating or contributing to this skill repository.
+
+## Installation
+
+Choose the command for your shell, then restart Codex if the skill is not discovered automatically.
+
+### PowerShell
+
+```powershell
+$skillsDir = Join-Path $HOME ".codex\skills"
+New-Item -ItemType Directory -Force -Path $skillsDir | Out-Null
+git clone https://github.com/Archiacne/personal_homepage_skill.git (Join-Path $skillsDir "personal-homepage-builder")
+```
+
+### Command Prompt
+
+```bat
+if not exist "%USERPROFILE%\.codex\skills" mkdir "%USERPROFILE%\.codex\skills"
+git clone https://github.com/Archiacne/personal_homepage_skill.git "%USERPROFILE%\.codex\skills\personal-homepage-builder"
+```
+
+### Bash
+
+```bash
+mkdir -p "$HOME/.codex/skills"
+git clone https://github.com/Archiacne/personal_homepage_skill.git "$HOME/.codex/skills/personal-homepage-builder"
+```
+
+After installation, the skill entrypoint is:
 
 ```text
 ~/.codex/skills/personal-homepage-builder/SKILL.md
 ```
 
-Restart or reload Codex after installation if the skill is not discovered automatically.
+## Usage
 
-## Use
-
-Invoke the skill explicitly or describe a matching task:
+Invoke the skill explicitly or describe a matching website request:
 
 ```text
 Use $personal-homepage-builder to build a bilingual personal site from my resume and Markdown articles.
 ```
 
-The skill preserves an existing project's architecture. For a new project without a requested stack, it uses the default architecture described in `references/default-architecture.md`.
+The skill preserves an existing project's architecture. When requirements are not specified, it uses the default technical stack and architecture documented in `references/default-architecture.md`.
 
-Local generation is the default. Creating repositories, pushing to GitHub, or publishing a site occurs only when explicitly requested.
-
-Create a default project in a new or empty directory:
-
-```text
-python scripts/scaffold_site.py ./my-homepage --name my-homepage
-```
-
-The script refuses to overwrite a non-empty directory. After replacing the starter placeholders, run `npm run validate` inside the generated project.
+Local generation and preview are the default. Creating repositories, pushing to GitHub, or publishing a site occurs only when explicitly requested and authorized.
 
 ## Validate this skill
 
@@ -53,11 +71,4 @@ npm ci
 npm run validate
 ```
 
-The repository CI runs the same Skill structure check and a GitHub Pages-style starter build on pushes and pull requests.
-
-## Development status
-
-- Skill routing, content rules, default architecture, GitHub Profile guidance, and delivery checks are implemented.
-- The default Astro starter has a validated desktop flow for Home, About, bilingual Blog, article pages, and language switching.
-- A GitHub Pages workflow is included in generated projects and remains inactive until the generated project is pushed and Pages is configured.
-- Mobile-specific visual acceptance and regression coverage are planned for a later iteration.
+The repository CI runs the same skill structure check and starter build on pushes and pull requests.
