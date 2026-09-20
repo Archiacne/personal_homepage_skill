@@ -1,5 +1,7 @@
 # Personal Homepage Builder
 
+[中文说明](./README-zh.md)
+
 A Codex skill for creating and revising personal homepages, About Me pages, Markdown blogs, portfolios, and GitHub Profile READMEs through conversation.
 
 ## Capabilities

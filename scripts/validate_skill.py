@@ -86,7 +86,13 @@ def main() -> int:
                 fail(f"starter package.json is missing the {script!r} script")
 
         link_errors = []
-        for markdown_file in [SKILL_FILE, *sorted((ROOT / "references").glob("*.md"))]:
+        markdown_files = [
+            ROOT / "README.md",
+            ROOT / "README-zh.md",
+            SKILL_FILE,
+            *sorted((ROOT / "references").glob("*.md")),
+        ]
+        for markdown_file in markdown_files:
             link_errors.extend(validate_markdown_links(markdown_file))
         if link_errors:
             fail("\n".join(link_errors))
@@ -101,4 +107,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
