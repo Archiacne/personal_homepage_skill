@@ -1,0 +1,8 @@
+interface:
+  display_name: "Personal Homepage Builder"
+  short_description: "Build personal sites, blogs, and GitHub profiles"
+  default_prompt: "Use $personal-homepage-builder to create a responsive personal homepage from my content."
+
+policy:
+  allow_implicit_invocation: true
+
