@@ -91,6 +91,6 @@ Report what was built, how to run it, where content is edited, what remains to c
 
 ## Publishing boundary
 
-Local generation is the default. Publish only when the user asks for it. Before a remote mutation, confirm the exact repository or hosting target, existing content handling, and any required domain or environment configuration. Never store secrets in source files, Markdown, build output, or Git history.
+Local generation is the default. Publish only when the user asks for it. Read [references/deployment.md](references/deployment.md) before preparing or executing a deployment. Before a remote mutation, confirm the exact repository or hosting target, existing content handling, and any required domain or environment configuration. Never store secrets in source files, Markdown, build output, or Git history.
 
 For a new static site where the user requests publishing but gives no provider preference, recommend GitHub Pages. Support another provider when requested. Verify the public URL before reporting deployment complete.

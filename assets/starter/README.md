@@ -30,3 +30,9 @@ SITE_URL=https://username.github.io BASE_PATH=/repository-name npm run build
 ```
 
 `npm run validate` performs the type/content checks, production build, and a static audit of page metadata, landmarks, headings, image alt text, and internal links.
+
+## GitHub Pages
+
+The starter includes `.github/workflows/deploy.yml`. After the project is pushed to its own GitHub repository, configure Pages to use **GitHub Actions** as the source. The workflow reads the repository's actual Pages origin and base path, validates the site, and deploys `dist`.
+
+Do not enable or run a public deployment until all placeholders, sample posts, and private content have been reviewed.

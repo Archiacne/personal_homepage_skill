@@ -57,4 +57,5 @@ The repository CI runs the same Skill structure check and a GitHub Pages-style s
 
 - Skill routing, content rules, default architecture, GitHub Profile guidance, and delivery checks are implemented.
 - The default Astro starter has a validated desktop flow for Home, About, bilingual Blog, article pages, and language switching.
+- A GitHub Pages workflow is included in generated projects and remains inactive until the generated project is pushed and Pages is configured.
 - Mobile-specific visual acceptance and regression coverage are planned for a later iteration.
