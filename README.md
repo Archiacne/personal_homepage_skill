@@ -42,6 +42,17 @@ python scripts/scaffold_site.py ./my-homepage --name my-homepage
 
 The script refuses to overwrite a non-empty directory. After replacing the starter placeholders, run `npm run validate` inside the generated project.
 
+## Validate this skill
+
+```text
+python scripts/validate_skill.py
+cd assets/starter
+npm ci
+npm run validate
+```
+
+The repository CI runs the same Skill structure check and a GitHub Pages-style starter build on pushes and pull requests.
+
 ## Development status
 
 - Skill routing, content rules, default architecture, GitHub Profile guidance, and delivery checks are implemented.

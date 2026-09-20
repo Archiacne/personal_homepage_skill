@@ -1,0 +1,41 @@
+name: Validate skill and starter
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: assets/starter/package-lock.json
+
+      - name: Validate skill structure
+        run: python scripts/validate_skill.py
+
+      - name: Install starter dependencies
+        run: npm ci
+        working-directory: assets/starter
+
+      - name: Validate starter build
+        run: npm run validate
+        working-directory: assets/starter
+        env:
+          ASTRO_TELEMETRY_DISABLED: "1"
+          SITE_URL: "https://example.github.io"
+          BASE_PATH: "/personal-homepage"
+
