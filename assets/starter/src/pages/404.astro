@@ -1,0 +1,18 @@
+---
+import { ui, type Locale } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath } from "../lib/i18n";
+
+const locale: Locale = "zh-CN";
+const labels = ui[locale];
+---
+
+<BaseLayout locale={locale} title={labels.notFoundTitle}>
+  <section class="shell error-page">
+    <p class="eyebrow">404</p>
+    <h1>{labels.notFoundTitle}</h1>
+    <p class="lede">{labels.notFoundBody}</p>
+    <a class="button primary" href={localizedPath(locale)}>{labels.backHome}</a>
+  </section>
+</BaseLayout>
+

@@ -1,0 +1,106 @@
+---
+import { site, ui, type Locale } from "../data/site";
+import { localizedPath, otherLocale } from "../lib/i18n";
+import { externalLinkProps } from "../lib/urls";
+
+interface Props {
+  locale: Locale;
+  languageHref?: string;
+}
+
+const { locale, languageHref = localizedPath(otherLocale(locale)) } = Astro.props;
+const labels = ui[locale];
+const navigation = [
+  { label: labels.home, href: localizedPath(locale) },
+  { label: labels.about, href: localizedPath(locale, "/about/") },
+  { label: labels.blog, href: localizedPath(locale, "/blog/") },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href={localizedPath(locale)} aria-label={`${site.displayName} — ${labels.home}`}>
+    {site.displayName}
+  </a>
+  <nav aria-label={locale === "zh-CN" ? "主导航" : "Primary navigation"}>
+    <ul>
+      {navigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      {site.githubUrl && (
+        <li>
+          <a href={site.githubUrl} {...externalLinkProps(site.githubUrl)}>{labels.github}</a>
+        </li>
+      )}
+    </ul>
+  </nav>
+  <a class="language" href={languageHref} hreflang={otherLocale(locale)}>
+    {labels.switchLanguage}
+  </a>
+</header>
+
+<style>
+  .site-header {
+    align-items: center;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr auto;
+    margin-inline: auto;
+    max-width: var(--content-wide);
+    padding: var(--space-5) var(--gutter);
+  }
+
+  .brand {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    overflow-x: auto;
+  }
+
+  ul {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  nav a,
+  .language {
+    color: var(--color-muted);
+    font-size: var(--step--1);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  nav a:focus-visible,
+  .language:hover,
+  .language:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .language {
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.55rem 0.8rem;
+  }
+
+  @media (min-width: 48rem) {
+    .site-header {
+      grid-template-columns: 1fr auto auto;
+    }
+
+    nav {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+</style>
+

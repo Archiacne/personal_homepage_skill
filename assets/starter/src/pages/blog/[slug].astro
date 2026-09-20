@@ -1,0 +1,43 @@
+---
+import { render } from "astro:content";
+import { site, ui, type Locale } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { findTranslation, getPublishedPosts, type BlogPost } from "../../lib/content";
+import { localizedPath, slugFromPostId } from "../../lib/i18n";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts("zh-CN");
+  return posts.map((post) => ({ params: { slug: slugFromPostId(post.id) }, props: { post } }));
+}
+
+interface Props { post: BlogPost }
+const { post } = Astro.props;
+const locale: Locale = "zh-CN";
+const labels = ui[locale];
+const { Content } = await render(post);
+const translation = await findTranslation(post);
+const languageHref = translation
+  ? localizedPath("en", `/blog/${slugFromPostId(translation.id)}/`)
+  : localizedPath("en");
+const formattedDate = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(post.data.publishedAt);
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${post.data.title} — ${site.displayName}`}
+  description={post.data.summary}
+  languageHref={languageHref}
+  alternates={translation ? [{ locale: "en", href: languageHref }] : []}
+  article={{ publishedAt: post.data.publishedAt, updatedAt: post.data.updatedAt }}
+>
+  <article class="shell article-page">
+    <a class="back-link" href={localizedPath(locale, "/blog/")}>← {labels.backToBlog}</a>
+    <header>
+      <p class="eyebrow">{formattedDate}</p>
+      <h1>{post.data.title}</h1>
+      <p class="lede">{post.data.summary}</p>
+    </header>
+    <div class="article-body"><Content /></div>
+  </article>
+</BaseLayout>
+

@@ -33,3 +33,9 @@ Use $personal-homepage-builder to build a bilingual personal site from my resume
 The skill preserves an existing project's architecture. For a new project without a requested stack, it uses the default architecture described in `references/default-architecture.md`.
 
 Local generation is the default. Creating repositories, pushing to GitHub, or publishing a site occurs only when explicitly requested.
+
+## Development status
+
+- Skill routing, content rules, default architecture, GitHub Profile guidance, and delivery checks are implemented.
+- The default Astro starter has a validated desktop flow for Home, About, bilingual Blog, article pages, and language switching.
+- Mobile-specific visual acceptance and regression coverage are planned for a later iteration.

@@ -1,0 +1,57 @@
+---
+import PostCard from "../../components/PostCard.astro";
+import { projects, site, ui, type Locale } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedPosts } from "../../lib/content";
+import { localizedPath } from "../../lib/i18n";
+
+const locale: Locale = "en";
+const labels = ui[locale];
+const recentPosts = (await getPublishedPosts(locale)).slice(0, 3);
+const featuredProjects = projects.filter((project) => project.featured);
+---
+
+<BaseLayout
+  locale={locale}
+  languageHref={localizedPath("zh-CN")}
+  alternates={[{ locale: "zh-CN", href: localizedPath("zh-CN") }]}
+>
+  <section class="hero shell">
+    <p class="eyebrow">{labels.introEyebrow}</p>
+    <h1>{site.displayName}</h1>
+    <p class="lede">{site.headline[locale]}</p>
+    <div class="actions">
+      <a class="button primary" href={localizedPath(locale, "/about/")}>{labels.readAbout}</a>
+      <a class="button" href={localizedPath(locale, "/blog/")}>{labels.readBlog}</a>
+    </div>
+  </section>
+
+  {featuredProjects.length > 0 && (
+    <section class="shell section">
+      <p class="eyebrow">{labels.featuredProjects}</p>
+      <div class="project-grid">
+        {featuredProjects.map((project) => (
+          <article class="project-card">
+            <h2>{project.title[locale]}</h2>
+            <p>{project.summary[locale]}</p>
+            <p class="project-tech">{project.technologies.join(" · ")}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="shell section writing">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{labels.blog}</p>
+        <h2>{labels.recentPosts}</h2>
+      </div>
+      <a href={localizedPath(locale, "/blog/")}>{labels.allPosts}</a>
+    </div>
+    {recentPosts.length > 0
+      ? recentPosts.map((post) => <PostCard post={post} locale={locale} />)
+      : <p class="empty-state">{labels.emptyPosts}</p>}
+  </section>
+</BaseLayout>
+

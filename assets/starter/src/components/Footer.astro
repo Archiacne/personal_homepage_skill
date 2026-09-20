@@ -1,0 +1,44 @@
+---
+import { site, ui, type Locale } from "../data/site";
+import { localizedPath } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const labels = ui[locale];
+---
+
+<footer>
+  <div>
+    <a href={localizedPath(locale)}>{site.displayName}</a>
+    <p>{labels.footer}</p>
+  </div>
+  <p>© {new Date().getFullYear()}</p>
+</footer>
+
+<style>
+  footer {
+    align-items: end;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    display: flex;
+    font-size: var(--step--1);
+    justify-content: space-between;
+    margin: var(--space-9) auto 0;
+    max-width: var(--content-wide);
+    padding: var(--space-6) var(--gutter);
+  }
+
+  footer a {
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  footer p {
+    margin: 0.35rem 0 0;
+  }
+</style>
+
