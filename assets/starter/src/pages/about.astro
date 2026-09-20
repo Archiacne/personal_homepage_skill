@@ -1,31 +1,25 @@
 ---
 import { site, ui, type Locale } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { localizedPath } from "../lib/i18n";
 
-const locale: Locale = "zh-CN";
+const locale: Locale = "en";
 const labels = ui[locale];
 const details = [
-  site.location[locale] && { label: labels.location, value: site.location[locale] },
-  site.company[locale] && { label: labels.company, value: site.company[locale] },
+  site.location && { label: labels.location, value: site.location },
+  site.company && { label: labels.company, value: site.company },
   site.email && { label: labels.email, value: site.email },
 ].filter(Boolean) as { label: string; value: string }[];
 ---
 
-<BaseLayout
-  locale={locale}
-  title={`${labels.aboutTitle} — ${site.displayName}`}
-  languageHref={localizedPath("en", "/about/")}
-  alternates={[{ locale: "en", href: localizedPath("en", "/about/") }]}
->
+<BaseLayout locale={locale} title={`${labels.aboutTitle} — ${site.displayName}`}>
   <article class="shell prose-page">
     <p class="eyebrow">{site.displayName}</p>
     <h1>{labels.aboutTitle}</h1>
-    <p class="lede">{site.bio[locale]}</p>
+    <p class="lede">{site.bio}</p>
 
     <section>
       <h2>{labels.focusTitle}</h2>
-      <p>{site.currentFocus[locale]}</p>
+      <p>{site.currentFocus}</p>
     </section>
 
     {details.length > 0 && (
@@ -38,4 +32,3 @@ const details = [
     )}
   </article>
 </BaseLayout>
-

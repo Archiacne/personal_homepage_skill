@@ -11,7 +11,7 @@ Read this guide for a new website when the user has not selected a technology st
 - Astro Content Collections for Markdown blog posts.
 - Native CSS with CSS Custom Properties for design tokens.
 - Native JavaScript for small interactions; an Astro island only when an interaction genuinely needs a client framework.
-- `zh-CN` and `en` route support when bilingual content is required.
+- English content and routes by default. Use another single language only when the user requests it.
 
 Do not add React, Vue, Svelte, Tailwind CSS, a database, a CMS, a server adapter, analytics, or a state-management library by default.
 
@@ -37,7 +37,7 @@ site/
 ├── public/
 ├── src/
 │   ├── components/
-│   ├── content/blog/{zh-cn,en}/
+│   ├── content/blog/
 │   ├── data/
 │   ├── layouts/
 │   ├── lib/
@@ -52,9 +52,9 @@ site/
 
 Separate concerns:
 
-- `src/data`: profile, navigation, projects, social links, and UI translations;
+- `src/data`: profile, navigation, projects, social links, and UI copy;
 - `src/content`: authored long-form posts;
-- `src/lib`: content queries, locale handling, and base-aware URL helpers;
+- `src/lib`: content queries and base-aware URL helpers;
 - `src/components`: reusable presentation;
 - `src/pages`: route composition and page metadata;
 - `src/styles`: tokens and global foundations.
@@ -63,20 +63,16 @@ Do not scatter biography or URLs across several components.
 
 ## Default routes
 
-Use the user's primary language at unprefixed routes and the second language under a locale prefix unless they request symmetric prefixes.
+Use unprefixed routes for the site's single language:
 
 ```text
 /
 /about/
 /blog/
 /blog/<slug>/
-/en/
-/en/about/
-/en/blog/
-/en/blog/<slug>/
 ```
 
-When English is primary, reverse the locale roles. Generate only routes backed by actual content.
+Do not generate locale-prefixed duplicates or a language switch. English is the default when the user does not select another language.
 
 Use a centralized base-aware URL helper so GitHub Pages project deployment does not break internal links or assets.
 
@@ -89,8 +85,7 @@ title: string
 summary: string
 publishedAt: date
 updatedAt: date?
-locale: zh-CN | en
-translationKey: string?
+locale: string
 tags: string[]
 cover: image?
 coverAlt: string?

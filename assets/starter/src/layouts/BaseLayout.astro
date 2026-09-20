@@ -4,17 +4,11 @@ import Footer from "../components/Footer.astro";
 import { site, ui, type Locale } from "../data/site";
 import "../styles/global.css";
 
-interface Alternate {
-  locale: Locale;
-  href: string;
-}
-
 interface Props {
   locale: Locale;
   title?: string;
   description?: string;
-  languageHref?: string;
-  alternates?: Alternate[];
+  showChrome?: boolean;
   article?: {
     publishedAt: Date;
     updatedAt?: Date;
@@ -23,10 +17,9 @@ interface Props {
 
 const {
   locale,
-  title = site.title[locale],
-  description = site.description[locale],
-  languageHref,
-  alternates = [],
+  title = site.title,
+  description = site.description,
+  showChrome = true,
   article,
 } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
@@ -42,9 +35,6 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <meta name="theme-color" content="#f5f1e8" />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     {canonical && <link rel="canonical" href={canonical} />}
-    {alternates.map((alternate) => (
-      <link rel="alternate" hreflang={alternate.locale} href={alternate.href} />
-    ))}
     <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -55,11 +45,10 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
   </head>
   <body>
     <a class="skip-link" href="#main-content">{ui[locale].skip}</a>
-    <Header locale={locale} languageHref={languageHref} />
+    {showChrome && <Header locale={locale} />}
     <main id="main-content">
       <slot />
     </main>
-    <Footer locale={locale} />
+    {showChrome && <Footer locale={locale} />}
   </body>
 </html>
-

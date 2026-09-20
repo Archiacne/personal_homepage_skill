@@ -19,7 +19,7 @@ Use CSS Custom Properties for recurring decisions. Change tokens for global revi
 
 ## Default direction
 
-When no style is specified, use a modern, calm, content-first design with a distinctive but restrained accent. Do not present a generic dashboard, template marketplace card grid, or resume form unless the user's goal calls for it.
+When no style is specified, inspect [`../assets/reference.html`](../assets/reference.html) and follow its minimal, centered personal-homepage composition: a prominent avatar, display name, short statement, restrained divider, and concise text navigation. Adapt it to the user's real content and accessibility needs rather than copying placeholder content literally.
 
 Avoid decorative sections without content. Visual personality can come from typography, proportion, color, illustration, and composition rather than unnecessary interface chrome.
 
@@ -29,7 +29,7 @@ Avoid decorative sections without content. Visual personality can come from typo
 - Use fluid type and spacing where appropriate.
 - Collapse navigation only when it no longer fits.
 - Let cards adapt to content and width rather than named device models.
-- Test long names, translated labels, long URLs, tags, code blocks, and tables.
+- Test long names, navigation labels, long URLs, tags, code blocks, and tables.
 - Prevent horizontal page overflow.
 - Provide stable image dimensions to reduce layout shift.
 
@@ -49,7 +49,6 @@ Avoid decorative sections without content. Visual personality can come from typo
 - Ensure keyboard access and visible focus.
 - Meet practical WCAG 2.2 AA contrast targets; do not claim full compliance without testing.
 - Use descriptive alt text for informative images and empty alt text for decoration.
-- Do not use a flag alone to represent language.
 - Do not use color as the only status indicator.
 - Give external links names that explain their destination.
 
@@ -61,9 +60,7 @@ Inspect at least:
 - a typical desktop viewport;
 - open and closed navigation states when a menu exists;
 - Home, About, Blog listing, and one article;
-- both languages that have content;
 - keyboard focus and reduced-motion behavior;
 - empty states and missing optional images.
 
 Fix broken hierarchy, overlap, clipping, low contrast, layout shift, and content overflow before delivery.
-

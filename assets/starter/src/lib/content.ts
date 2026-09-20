@@ -13,12 +13,3 @@ export async function getPostBySlug(locale: Locale, slug: string): Promise<BlogP
   return (await getPublishedPosts(locale)).find((post) => slugFromPostId(post.id) === slug);
 }
 
-export async function findTranslation(post: BlogPost): Promise<BlogPost | undefined> {
-  if (!post.data.translationKey) return undefined;
-
-  const targetLocale: Locale = post.data.locale === "zh-CN" ? "en" : "zh-CN";
-  return (await getPublishedPosts(targetLocale)).find(
-    (candidate) => candidate.data.translationKey === post.data.translationKey,
-  );
-}
-

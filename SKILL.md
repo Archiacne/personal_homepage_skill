@@ -1,6 +1,6 @@
 ---
 name: personal-homepage-builder
-description: Create or revise a personal homepage, About Me site, portfolio, Markdown blog, or GitHub Profile README through conversation. Use for personal-site planning and implementation, content-driven redesigns, bilingual personal sites, and connecting a homepage with About, Blog, projects, and GitHub. Do not use for unrelated product websites, dashboards, e-commerce, or isolated generic frontend components.
+description: Create or revise a personal homepage, About Me site, portfolio, Markdown blog, or GitHub Profile README through conversation. Use for personal-site planning and implementation, content-driven redesigns, and connecting a homepage with About, Blog, projects, and GitHub. Do not use for unrelated product websites, dashboards, e-commerce, or isolated generic frontend components.
 metadata:
   short-description: Build personal websites and GitHub profiles
 ---
@@ -33,7 +33,7 @@ Extract information already present in the conversation and files before asking 
 - the site's purpose and audience;
 - the display name and one-line identity;
 - the intended Home, About, Blog, projects, GitHub, and contact content;
-- the primary language and whether Chinese/English versions are required;
+- the requested language, defaulting to English when none is specified;
 - visual direction and supplied references;
 - publishing requirements and existing constraints.
 
@@ -57,13 +57,9 @@ Create a real runnable site, not a visual mockup. Keep content data separate fro
 
 Use semantic HTML and responsive, content-first layouts. Read [references/design-quality.md](references/design-quality.md) before creating or substantially changing the visual system.
 
-For bilingual sites:
+Use English for the site, page metadata, navigation, sample copy, and GitHub Profile README unless the user explicitly requests another language. Generate one language only. Multilingual routes and language-switching controls are not currently supported; if requested, explain this limitation and ask the user to choose one language for the generated site.
 
-- keep UI translations separate from personal content;
-- generate only pages whose content exists;
-- link a language switch to the equivalent page when available and otherwise to that language's homepage;
-- mark machine-generated translations as drafts until the user confirms them;
-- set correct document language and localized metadata.
+When the user does not provide a visual direction, inspect [assets/reference.html](assets/reference.html) and use its centered, minimal profile composition as the default. Adapt the structure to the user's real content and selected framework; do not copy placeholder identity, links, or tracking code from an external reference.
 
 ### 4. Build the GitHub profile deliverable
 
@@ -83,7 +79,7 @@ At minimum:
 
 - install dependencies using the project's lockfile policy;
 - run type/content checks and a production build;
-- inspect Home, About, Blog, one article, language switching, and GitHub links that exist;
+- inspect Home, About, Blog, one article, and GitHub links that exist;
 - check keyboard access, visible focus, headings, alt text, contrast, mobile overflow, and browser console errors;
 - distinguish local completion from public deployment.
 

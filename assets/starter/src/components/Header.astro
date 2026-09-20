@@ -1,14 +1,13 @@
 ---
 import { site, ui, type Locale } from "../data/site";
-import { localizedPath, otherLocale } from "../lib/i18n";
+import { localizedPath } from "../lib/i18n";
 import { externalLinkProps } from "../lib/urls";
 
 interface Props {
   locale: Locale;
-  languageHref?: string;
 }
 
-const { locale, languageHref = localizedPath(otherLocale(locale)) } = Astro.props;
+const { locale } = Astro.props;
 const labels = ui[locale];
 const navigation = [
   { label: labels.home, href: localizedPath(locale) },
@@ -21,7 +20,7 @@ const navigation = [
   <a class="brand" href={localizedPath(locale)} aria-label={`${site.displayName} — ${labels.home}`}>
     {site.displayName}
   </a>
-  <nav aria-label={locale === "zh-CN" ? "主导航" : "Primary navigation"}>
+  <nav aria-label="Primary navigation">
     <ul>
       {navigation.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       {site.githubUrl && (
@@ -31,9 +30,6 @@ const navigation = [
       )}
     </ul>
   </nav>
-  <a class="language" href={languageHref} hreflang={otherLocale(locale)}>
-    {labels.switchLanguage}
-  </a>
 </header>
 
 <style>
@@ -71,8 +67,7 @@ const navigation = [
     white-space: nowrap;
   }
 
-  nav a,
-  .language {
+  nav a {
     color: var(--color-muted);
     font-size: var(--step--1);
     font-weight: 650;
@@ -80,21 +75,13 @@ const navigation = [
   }
 
   nav a:hover,
-  nav a:focus-visible,
-  .language:hover,
-  .language:focus-visible {
+  nav a:focus-visible {
     color: var(--color-accent);
-  }
-
-  .language {
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 0.55rem 0.8rem;
   }
 
   @media (min-width: 48rem) {
     .site-header {
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto;
     }
 
     nav {
@@ -103,4 +90,3 @@ const navigation = [
     }
   }
 </style>
-

@@ -36,12 +36,11 @@ Validate observable behavior, not just command exit codes.
 - No sample or inferred material is presented as user fact.
 - Sensitive data is excluded unless explicitly intended for publication.
 
-### Bilingual behavior
+### Language
 
-- The document `lang` matches each page.
-- A locale switch targets a real equivalent page or the target locale home.
-- Localized title, description, canonical, and alternate metadata are correct.
-- Missing translations do not create empty routes or 404 links.
+- The document `lang` matches the selected site language.
+- Navigation, page copy, metadata, and sample content use the same language.
+- No locale-prefixed duplicate routes or language-switching controls are present.
 
 ### Browser and design
 
@@ -69,7 +68,7 @@ Publishing is a separate, user-authorized action. Before it:
 After it:
 
 - open the public URL;
-- test Home, About, Blog, one post, language switching, assets, and 404 behavior;
+- test Home, About, Blog, one post, assets, and 404 behavior;
 - distinguish a preview URL from a production URL;
 - stop and report the concrete error if authentication, DNS, or host configuration blocks completion.
 
@@ -81,7 +80,7 @@ Lead with the outcome and include:
 
 1. pages and deliverables created or changed;
 2. local run/build commands;
-3. primary files for editing profile, projects, navigation, translations, and posts;
+3. primary files for editing profile, projects, navigation, and posts;
 4. checks performed and their results;
-5. remaining placeholders, unconfirmed translations, or configuration;
+5. remaining placeholders or configuration;
 6. the verified public URL only if publishing completed.

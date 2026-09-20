@@ -36,7 +36,7 @@ After pushing the workflow:
 1. Wait for the workflow result.
 2. Inspect failed build or Pages configuration output before retrying.
 3. Open the reported public URL.
-4. Test Home, About, Blog, an article, language switching, assets, and 404 behavior.
+4. Test Home, About, Blog, an article, assets, and 404 behavior.
 5. Report deployment complete only when the public URL is reachable.
 
 ## Vercel
@@ -80,4 +80,3 @@ Do not buy a domain or edit DNS without an explicit request. When a custom domai
 - DNS pending: report the current verified state; do not claim completion.
 - Existing production conflict: do not overwrite until the user confirms the target.
 - Repeated provider failure: stop after the concrete cause is established rather than retrying unchanged actions.
-

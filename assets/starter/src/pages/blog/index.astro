@@ -3,20 +3,13 @@ import PostCard from "../../components/PostCard.astro";
 import { site, ui, type Locale } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPublishedPosts } from "../../lib/content";
-import { localizedPath } from "../../lib/i18n";
 
-const locale: Locale = "zh-CN";
+const locale: Locale = "en";
 const labels = ui[locale];
 const posts = await getPublishedPosts(locale);
 ---
 
-<BaseLayout
-  locale={locale}
-  title={`${labels.blogTitle} — ${site.displayName}`}
-  description={labels.blogIntro}
-  languageHref={localizedPath("en", "/blog/")}
-  alternates={[{ locale: "en", href: localizedPath("en", "/blog/") }]}
->
+<BaseLayout locale={locale} title={`${labels.blogTitle} — ${site.displayName}`} description={labels.blogIntro}>
   <section class="shell listing-page">
     <p class="eyebrow">{site.displayName}</p>
     <h1>{labels.blogTitle}</h1>
@@ -28,4 +21,3 @@ const posts = await getPublishedPosts(locale);
     </div>
   </section>
 </BaseLayout>
-

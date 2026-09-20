@@ -1,57 +1,93 @@
 ---
-import PostCard from "../components/PostCard.astro";
-import { projects, site, ui, type Locale } from "../data/site";
+import { site, ui, type Locale } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getPublishedPosts } from "../lib/content";
 import { localizedPath } from "../lib/i18n";
 
-const locale: Locale = "zh-CN";
+const locale: Locale = "en";
 const labels = ui[locale];
-const recentPosts = (await getPublishedPosts(locale)).slice(0, 3);
-const featuredProjects = projects.filter((project) => project.featured);
 ---
 
-<BaseLayout
-  locale={locale}
-  languageHref={localizedPath("en")}
-  alternates={[{ locale: "en", href: localizedPath("en") }]}
->
-  <section class="hero shell">
-    <p class="eyebrow">{labels.introEyebrow}</p>
-    <h1>{site.displayName}</h1>
-    <p class="lede">{site.headline[locale]}</p>
-    <div class="actions">
-      <a class="button primary" href={localizedPath(locale, "/about/")}>{labels.readAbout}</a>
-      <a class="button" href={localizedPath(locale, "/blog/")}>{labels.readBlog}</a>
-    </div>
-  </section>
-
-  {featuredProjects.length > 0 && (
-    <section class="shell section">
-      <p class="eyebrow">{labels.featuredProjects}</p>
-      <div class="project-grid">
-        {featuredProjects.map((project) => (
-          <article class="project-card">
-            <h2>{project.title[locale]}</h2>
-            <p>{project.summary[locale]}</p>
-            <p class="project-tech">{project.technologies.join(" · ")}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
-
-  <section class="shell section writing">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">{labels.blog}</p>
-        <h2>{labels.recentPosts}</h2>
-      </div>
-      <a href={localizedPath(locale, "/blog/")}>{labels.allPosts}</a>
-    </div>
-    {recentPosts.length > 0
-      ? recentPosts.map((post) => <PostCard post={post} locale={locale} />)
-      : <p class="empty-state">{labels.emptyPosts}</p>}
+<BaseLayout locale={locale} showChrome={false}>
+  <section class="reference-home" aria-labelledby="profile-name">
+    <div class="avatar" aria-hidden="true">Photo</div>
+    <h1 id="profile-name">{site.displayName}</h1>
+    <p class="slogan">{site.headline}</p>
+    <hr />
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href={localizedPath(locale, "/about/")}>{labels.about}</a></li>
+        <li><a href={localizedPath(locale, "/blog/")}>{labels.blog}</a></li>
+        {site.githubUrl && <li><a href={site.githubUrl}>{labels.github}</a></li>}
+      </ul>
+    </nav>
   </section>
 </BaseLayout>
 
+<style>
+  .reference-home {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 3rem var(--gutter);
+    text-align: center;
+  }
+
+  .avatar {
+    background: var(--color-surface);
+    border-radius: 50%;
+    display: grid;
+    height: 7.5rem;
+    margin-bottom: var(--space-5);
+    place-items: center;
+    width: 7.5rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 400;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .slogan {
+    color: var(--color-muted);
+    margin: var(--space-4) 0 var(--space-6);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin: 0 0 var(--space-5);
+    width: 4rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li:not(:last-child)::after {
+    color: var(--color-border);
+    content: "|";
+    margin-left: var(--space-3);
+  }
+
+  a {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+</style>
